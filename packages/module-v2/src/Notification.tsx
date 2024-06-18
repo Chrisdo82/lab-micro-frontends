@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToasterService } from '@public-ui/components';
+import { KoliBri } from 'kolibri-v2-provider';
 import type { ReactNode } from 'react';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -77,7 +77,7 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
 	const [notifications, setNotifications] = useState<(NotificationState & { closeFn?: () => void })[]>([]);
 
 	const value = useMemo<NotificationContextProps>(() => {
-		const toaster = ToasterService.getInstance(document);
+		const toaster = KoliBri.ToasterService.getInstance(document);
 		return {
 			notifications,
 			addNotification: async (notification) => {
@@ -124,7 +124,7 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
 	}, [notifications]);
 
 	useEffect(() => {
-		const toaster = ToasterService.getInstance(document);
+		const toaster = KoliBri.ToasterService.getInstance(document);
 		return () => {
 			toaster.closeAll();
 			setNotifications([]);
